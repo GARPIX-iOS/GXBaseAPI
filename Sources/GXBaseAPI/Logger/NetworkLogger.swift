@@ -29,8 +29,10 @@ class NetworkLogger {
         if let body = request.httpBody {
             output += "\n \(String(data: body, encoding: .utf8) ?? "")"
         }
-        print(output)
+        
         Logger.networkCall.debug("\(output)")
+        Logger.networkCall.info("\(output)")
+
     }
     
     static func log(response: HTTPURLResponse?, data: Data?) {
@@ -58,8 +60,7 @@ class NetworkLogger {
             output += "\n\(String(data: body, encoding: .utf8) ?? "")\n"
         }
 
-        print(output)
         Logger.networkCall.debug("\(output)")
-
+        Logger.networkCall.info("\(output)")
     }
 }

@@ -18,7 +18,9 @@ public extension BaseAPIManagerProtocol {
             let request = try endpoint.urlRequest(baseURL: baseURL)
             return URLSession.shared.dataTaskPublisher(for: request)
                 .tryMap { result -> Output in
-                    try decoder.decode(Output.self, from: result.data)
+                    let httpResponse = result.response as? HTTPURLResponse
+                    NetworkLogger.log(response: httpResponse, data: result.data)
+                    return try decoder.decode(Output.self, from: result.data)
                 }
                 .eraseToAnyPublisher()
         } catch {
