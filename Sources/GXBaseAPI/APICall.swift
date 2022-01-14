@@ -23,6 +23,7 @@ public extension APICall {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.httpBody = nil
+        NetworkLogger.log(request: request)
         return request
     }
     
@@ -42,6 +43,7 @@ public extension APICall {
         request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.allHTTPHeaderFields = headers
         request.httpBody = body
+        NetworkLogger.log(request: request)
         return request
     }
 }

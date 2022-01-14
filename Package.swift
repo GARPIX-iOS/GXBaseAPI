@@ -7,8 +7,8 @@ let package = Package(
     name: "GXBaseAPI",
     platforms: [
         // Add support for all platforms starting from a specific version.
-        .iOS(.v13),
-        .macOS(.v10_15),
+        .iOS(.v14),
+        .macOS(.v11),
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
