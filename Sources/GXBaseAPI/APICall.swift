@@ -18,21 +18,24 @@ public extension APICall {
         guard let url = URL(string: baseURL + path) else {
             throw GXBaseAPIErros.notValidURL
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.httpBody = nil
         return request
     }
-
+    
     func urlRequest<BodyData: Codable>(baseURL: String, bodyData: BodyData) throws -> URLRequest {
         guard let url = URL(string: baseURL + path) else {
             throw GXBaseAPIErros.notValidURL
         }
-
-        let body = try JSONEncoder().encode(bodyData)
-
+        
+        guard let body = try? JSONEncoder().encode(bodyData) else {
+            debugPrint("Error: Trying to convert model to JSON data")
+            throw GXBaseAPIErros.notValidBody
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
