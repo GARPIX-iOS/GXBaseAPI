@@ -38,6 +38,8 @@ public extension APICall {
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type") // the request is JSON
+        request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         request.allHTTPHeaderFields = headers
         request.httpBody = body
         return request
