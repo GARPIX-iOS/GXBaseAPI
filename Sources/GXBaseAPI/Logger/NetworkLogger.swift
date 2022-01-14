@@ -31,8 +31,7 @@ class NetworkLogger {
         }
         
         Logger.networkCall.debug("\(output)")
-        Logger.networkCall.info("\(output)")
-
+        Logger.networkCall.info(OSLogMessage(stringLiteral: output))
     }
     
     static func log(response: HTTPURLResponse?, data: Data?) {
@@ -61,6 +60,6 @@ class NetworkLogger {
         }
 
         Logger.networkCall.debug("\(output)")
-        Logger.networkCall.info("\(output)")
+        Logger.networkCall.info(OSLogMessage(stringLiteral: output))
     }
 }
