@@ -22,6 +22,7 @@ class NetworkLogger {
        \(urlAsString) \n\n
        \(method) \(path)?\(query) HTTP/1.1 \n
        HOST: \(host)\n
+       HEADERS:\n
        """
         for (key,value) in request.allHTTPHeaderFields ?? [:] {
             output += "\(key): \(value) \n"
@@ -53,9 +54,12 @@ class NetworkLogger {
         if let host = components?.host {
             output += "Host: \(host)\n"
         }
+        output += "HEADERS:\n"
         for (key, value) in response?.allHeaderFields ?? [:] {
             output += "\(key): \(value)\n"
         }
+        
+        output += "BODY DATA:\n"
         if let body = data {
             output += "\n\(String(data: body, encoding: .utf8) ?? "")\n"
         }
