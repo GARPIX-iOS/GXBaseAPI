@@ -13,13 +13,13 @@ public protocol UploadAPIManager {
 }
 
 public extension UploadAPIManager {
-    func upload(with multipartFormData: MultipartFormDataRequest) -> AnyPublisher<Data, Error> {
+    func upload<Output: Codable>(with multipartFormData: MultipartFormDataRequest, decoder: JSONDecoder = JSONDecoder()) -> AnyPublisher<Output, Error> {
         let request = multipartFormData.asURLRequest()
         return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { result -> Data in
+            .tryMap { result -> Output in
                 let httpResponse = result.response as? HTTPURLResponse
                 NetworkLogger.log(response: httpResponse, data: result.data)
-                return result.data
+                return try decoder.decode(Output.self, from: result.data)
             }
             .eraseToAnyPublisher()
     }
