@@ -8,8 +8,8 @@
 import Foundation
 
 public struct MultipartFormDataRequest {
-    private let boundary: String = UUID().uuidString
-    private var httpBody = NSMutableData()
+    public let boundary: String = UUID().uuidString
+    public var httpBody = NSMutableData()
     let url: URL
 
     public init(url: URL) {

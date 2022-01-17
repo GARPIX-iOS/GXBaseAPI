@@ -47,4 +47,19 @@ public extension APICall {
         return request
     }
     
+    
+    func uploadRequest(baseURL: String, boundary: String) throws -> URLRequest {
+        guard let url = URL(string: baseURL + path) else {
+            throw GXBaseAPIErros.notValidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = headers
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        NetworkLogger.log(request: request)
+        return request
+    }
+
+    
 }
