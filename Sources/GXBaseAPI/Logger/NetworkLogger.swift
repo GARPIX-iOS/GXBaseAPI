@@ -30,8 +30,6 @@ class NetworkLogger {
         if let body = request.httpBody {
             output += "\n \(String(data: body, encoding: .utf8) ?? "")"
         }
-        
-        Logger.networkCall.debug("\(output)")
         Logger.networkCall.info("\(output)")
 
     }
@@ -61,10 +59,8 @@ class NetworkLogger {
         
         output += "BODY DATA:\n"
         if let body = data {
-            output += "\n\(String(data: body, encoding: .utf8) ?? "")\n"
+            output += "\n\(body.prettyPrintedJSONString ?? "") \n"
         }
-
-        Logger.networkCall.debug("\(output)")
         Logger.networkCall.info("\(output)")
     }
 }
