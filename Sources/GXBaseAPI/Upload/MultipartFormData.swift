@@ -12,7 +12,7 @@ public struct MultipartFormDataRequest {
     private var httpBody = NSMutableData()
     let url: URL
 
-    init(url: URL) {
+    public init(url: URL) {
         self.url = url
     }
 
