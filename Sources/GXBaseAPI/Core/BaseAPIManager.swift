@@ -52,6 +52,7 @@ public extension BaseAPIManagerProtocol {
     func upload<Output: Codable>(endpoint: APICall, with multipartFormData: MultipartFormDataRequest, decoder: JSONDecoder = JSONDecoder()) -> AnyPublisher<Output, Error> {
         do {
             var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: multipartFormData.boundary)
+            multipartFormData.httpBody.append("--\(multipartFormData.boundary)--")
             request.httpBody = multipartFormData.httpBody as Data
             NetworkLogger.log(request: request)
             return URLSession.shared.dataTaskPublisher(for: request)
