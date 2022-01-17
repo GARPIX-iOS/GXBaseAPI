@@ -48,7 +48,7 @@ public extension BaseAPIManagerProtocol {
     }
 }
 
-extension BaseAPIManagerProtocol {
+public extension BaseAPIManagerProtocol {
     func upload<Output: Codable>(endpoint: APICall, with multipartFormData: MultipartFormDataRequest, decoder: JSONDecoder = JSONDecoder()) -> AnyPublisher<Output, Error> {
         do {
             var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: multipartFormData.boundary)
