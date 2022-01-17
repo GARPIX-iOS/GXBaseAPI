@@ -57,9 +57,6 @@ public extension APICall {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        NetworkLogger.log(request: request)
         return request
-    }
-
-    
+    }    
 }

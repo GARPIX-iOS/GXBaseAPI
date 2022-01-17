@@ -53,6 +53,7 @@ public extension BaseAPIManagerProtocol {
         do {
             var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: multipartFormData.boundary)
             request.httpBody = multipartFormData.httpBody as Data
+            NetworkLogger.log(request: request)
             return URLSession.shared.dataTaskPublisher(for: request)
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
