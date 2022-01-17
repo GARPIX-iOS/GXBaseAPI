@@ -10,11 +10,6 @@ import Foundation
 public struct MultipartFormDataRequest {
     public let boundary: String = UUID().uuidString
     public var httpBody = NSMutableData()
-    let url: URL
-
-    public init(url: URL) {
-        self.url = url
-    }
 
     func addTextField(named name: String, value: String) {
         httpBody.append(textFormField(named: name, value: value))
@@ -48,17 +43,6 @@ public struct MultipartFormDataRequest {
         fieldData.append("\r\n")
 
         return fieldData as Data
-    }
-    
-    func asURLRequest() -> URLRequest {
-        var request = URLRequest(url: url)
-
-        request.httpMethod = HTTPMethod.POST.rawValue
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-
-        httpBody.append("--\(boundary)--")
-        request.httpBody = httpBody as Data
-        return request
     }
 }
 
