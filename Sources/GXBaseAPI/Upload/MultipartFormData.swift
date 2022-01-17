@@ -31,7 +31,7 @@ public struct MultipartFormDataRequest {
         return fieldString
     }
 
-    func addDataField(named name: String, data: Data, mimeType: String) {
+    public func addDataField(named name: String, data: Data, mimeType: String) {
         httpBody.append(dataFormField(named: name, data: data, mimeType: mimeType))
     }
 
