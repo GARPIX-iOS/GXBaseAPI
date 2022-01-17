@@ -27,6 +27,7 @@ class NetworkLogger {
         for (key,value) in request.allHTTPHeaderFields ?? [:] {
             output += "\(key): \(value) \n"
         }
+        output += "BODY DATA:\n"
         if let body = request.httpBody {
             output += "\n \(String(data: body, encoding: .utf8) ?? "")"
         }
