@@ -53,7 +53,9 @@ public extension BaseAPIManagerProtocol {
         do {
             var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: multipartFormData.boundary)
             multipartFormData.httpBody.append("--\(multipartFormData.boundary)--")
+            debugPrint("form data BaseAPIManagerProtocol", String(data:  multipartFormData.httpBody as Data, encoding: .utf8))
             request.httpBody = multipartFormData.httpBody as Data
+            debugPrint("form data BaseAPIManagerProtocol", String(data: request.httpBody!, encoding: .utf8))
             NetworkLogger.log(request: request)
             return URLSession.shared.dataTaskPublisher(for: request)
                 .tryMap { result -> Output in
