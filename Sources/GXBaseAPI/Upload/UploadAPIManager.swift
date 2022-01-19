@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 public protocol UploadAPIManager {
-    func upload<Output: Codable>(endpoint: APICall, with multipartFormData: MultipartFormDataRequest, decoder: JSONDecoder) -> AnyPublisher<Output, Error>
+    func upload<Output: Codable>(endpoint: APICall, with boundary: String, and httpBody: Data, decoder: JSONDecoder) -> AnyPublisher<Output, Error>
 }
