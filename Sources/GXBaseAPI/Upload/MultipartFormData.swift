@@ -41,7 +41,7 @@ public struct MultipartFormDataRequest {
         let fieldName = "image_field"
 
         fieldData.append("--\(boundary)\r\n")
-        fieldData.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
+        fieldData.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(name)\"\r\n")
         fieldData.append("Content-Type: \(mimeType)\r\n")
         fieldData.append("\r\n")
         fieldData.append(data)
