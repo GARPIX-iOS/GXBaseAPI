@@ -57,7 +57,6 @@ public extension APICall {
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept") // the response expected to be in JSON format
         return request
     }    
 }

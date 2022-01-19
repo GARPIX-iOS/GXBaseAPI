@@ -49,13 +49,10 @@ public extension BaseAPIManagerProtocol {
 }
 
 public extension BaseAPIManagerProtocol {
-    func upload<Output: Codable>(endpoint: APICall, with multipartFormData: MultipartFormDataRequest, decoder: JSONDecoder = JSONDecoder()) -> AnyPublisher<Output, Error> {
+    func upload<Output: Codable>(endpoint: APICall, with boundary: String, and httpBody: Data, decoder: JSONDecoder = JSONDecoder()) -> AnyPublisher<Output, Error> {
         do {
-            var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: multipartFormData.boundary)
-            multipartFormData.httpBody.append("--\(multipartFormData.boundary)--")
-            debugPrint("form data BaseAPIManagerProtocol", String(data:  multipartFormData.httpBody as Data, encoding: .utf8))
-            request.httpBody = multipartFormData.httpBody as Data
-            debugPrint("form data BaseAPIManagerProtocol", String(data: request.httpBody!, encoding: .utf8))
+            var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: boundary)
+            request.httpBody = httpBody
             NetworkLogger.log(request: request)
             return URLSession.shared.dataTaskPublisher(for: request)
                 .tryMap { result -> Output in
