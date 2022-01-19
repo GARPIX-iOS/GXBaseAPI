@@ -14,7 +14,7 @@ public struct Media {
     let data: Data
     let mimeType: String
     
-    init?(withImage image: UIImage, forKey key: String) {
+    public init?(withImage image: UIImage, forKey key: String) {
         self.key = key
         self.mimeType = "image/jpeg"
         self.filename = "imagefile.jpg"
