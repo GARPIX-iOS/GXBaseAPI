@@ -53,6 +53,7 @@ public extension BaseAPIManagerProtocol {
         do {
             var request = try endpoint.uploadRequest(baseURL: baseURL, boundary: boundary)
             request.httpBody = httpBody
+            request.setValue(String(httpBody.count), forHTTPHeaderField: "Content-Length")
             NetworkLogger.log(request: request)
             return URLSession.shared.dataTaskPublisher(for: request)
                 .tryMap { result -> Output in
