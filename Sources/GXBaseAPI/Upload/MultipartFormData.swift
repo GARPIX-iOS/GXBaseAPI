@@ -16,7 +16,7 @@ public struct MultipartFormDataRequest {
         
     }
     
-    public func createDataBody(withParameters params: Parameters?, media: [Media]?, boundary: String) -> Data {
+    public func createDataBody(withParameters params: Parameters?, media: [Media]?) -> Data {
        let lineBreak = "\r\n"
        var body = Data()
        if let parameters = params {
