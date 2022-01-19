@@ -38,9 +38,10 @@ public struct MultipartFormDataRequest {
                                data: Data,
                                mimeType: String) -> Data {
         let fieldData = NSMutableData()
+        let fieldName = "image_field"
 
         fieldData.append("--\(boundary)\r\n")
-        fieldData.append("Content-Disposition: form-data; name=\"\(name)\"\r\n")
+        fieldData.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n")
         fieldData.append("Content-Type: \(mimeType)\r\n")
         fieldData.append("\r\n")
         fieldData.append(data)
