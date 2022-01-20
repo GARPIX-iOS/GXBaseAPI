@@ -36,3 +36,5 @@ extension Data {
         return prettyPrintedString
     }
 }
+
+public struct NoContentResponse: Codable {}
