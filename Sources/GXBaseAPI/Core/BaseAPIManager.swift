@@ -20,7 +20,7 @@ public extension BaseAPIManagerProtocol {
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
                     NetworkLogger.log(response: httpResponse, data: result.data)
-                    return try decoder.decode(Output.self, from: result.data)
+                    return try ErrorHandler.checkDecodingErrors(decoder: decoder, model: Output.self, with: result.data)
                 }
                 .eraseToAnyPublisher()
         } catch {
@@ -29,7 +29,7 @@ public extension BaseAPIManagerProtocol {
             )
         }
     }
-
+    
     func fetch<Input: Codable, Output: Codable>(endpoint: APICall, params: Input? = nil, decoder: JSONDecoder = JSONDecoder()) -> AnyPublisher<Output, Error> {
         do {
             let request = try endpoint.urlRequest(baseURL: baseURL, bodyData: params)
@@ -37,7 +37,7 @@ public extension BaseAPIManagerProtocol {
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
                     NetworkLogger.log(response: httpResponse, data: result.data)
-                    return try decoder.decode(Output.self, from: result.data)
+                    return try ErrorHandler.checkDecodingErrors(decoder: decoder, model: Output.self, with: result.data)
                 }
                 .eraseToAnyPublisher()
         } catch {
@@ -59,7 +59,7 @@ public extension BaseAPIManagerProtocol {
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
                     NetworkLogger.log(response: httpResponse, data: result.data)
-                    return try decoder.decode(Output.self, from: result.data)
+                    return try ErrorHandler.checkDecodingErrors(decoder: decoder, model: Output.self, with: result.data)
                 }
                 .eraseToAnyPublisher()
         } catch {
