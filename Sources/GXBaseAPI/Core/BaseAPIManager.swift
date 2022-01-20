@@ -20,6 +20,11 @@ public extension BaseAPIManagerProtocol {
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
                     NetworkLogger.log(response: httpResponse, data: result.data)
+                    
+                    if httpResponse?.statusCode == 204 {
+                        throw GXBaseAPIErros.noContent
+                    }
+        
                     return try ErrorHandler.checkDecodingErrors(decoder: decoder, model: Output.self, with: result.data)
                 }
                 .eraseToAnyPublisher()
@@ -37,6 +42,11 @@ public extension BaseAPIManagerProtocol {
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
                     NetworkLogger.log(response: httpResponse, data: result.data)
+                    
+                    if httpResponse?.statusCode == 204 {
+                        throw GXBaseAPIErros.noContent
+                    }
+                    
                     return try ErrorHandler.checkDecodingErrors(decoder: decoder, model: Output.self, with: result.data)
                 }
                 .eraseToAnyPublisher()
@@ -59,6 +69,11 @@ public extension BaseAPIManagerProtocol {
                 .tryMap { result -> Output in
                     let httpResponse = result.response as? HTTPURLResponse
                     NetworkLogger.log(response: httpResponse, data: result.data)
+                    
+                    if httpResponse?.statusCode == 204 {
+                        throw GXBaseAPIErros.noContent
+                    }
+                    
                     return try ErrorHandler.checkDecodingErrors(decoder: decoder, model: Output.self, with: result.data)
                 }
                 .eraseToAnyPublisher()
