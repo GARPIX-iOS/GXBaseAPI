@@ -18,6 +18,19 @@ public enum HTTPMethod: String {
 public typealias HTTPHeaders = [String: String]
 public typealias HTTPQuery = [String: String]
 
+public extension String {
+    public static var page = "page"
+    public static var pageSize = "page_size"
+}
+
+public extension HTTPQuery {
+    public static func createDefaultPaging(_ pageNumber: Int, _ pageSize: Int) -> HTTPQuery {
+        let pageNumberValue = String(pageNumber)
+        let pageSizeValue = String(pageSize)
+        return [.page: pageNumberValue, .pageSize : pageSizeValue]
+    }
+}
+
 public extension JSONDecoder {
     static let snakeCaseConverting: JSONDecoder = {
         let decoder = JSONDecoder()
